@@ -1,0 +1,126 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\tron\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|c:\\users\\acer\\onedrive\\documentos\\github\\tron\\program\\tron\\tron\\clasegrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\clasegrid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|c:\\users\\acer\\onedrive\\documentos\\github\\tron\\program\\tron\\tron\\clasebots.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\clasebots.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|c:\\users\\acer\\onedrive\\documentos\\github\\tron\\program\\tron\\tron\\clasemoto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\clasemoto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|c:\\users\\acer\\onedrive\\documentos\\github\\tron\\program\\tron\\tron\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|c:\\users\\acer\\onedrive\\documentos\\github\\tron\\program\\tron\\tron\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A8C4F31A-D116-4A0D-B0E9-5DBF150744A1}|TRON\\TRON.csproj|solutionrelative:tron\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ClaseMoto.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseMoto.cs",
+              "RelativeDocumentMoniker": "TRON\\ClaseMoto.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseMoto.cs",
+              "RelativeToolTip": "TRON\\ClaseMoto.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAcwHwAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T20:41:22.582Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Form1.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.Designer.cs",
+              "RelativeDocumentMoniker": "TRON\\Form1.Designer.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.Designer.cs",
+              "RelativeToolTip": "TRON\\Form1.Designer.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAlwC0AAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-08T23:59:53.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ClaseBots.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseBots.cs",
+              "RelativeDocumentMoniker": "TRON\\ClaseBots.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseBots.cs",
+              "RelativeToolTip": "TRON\\ClaseBots.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAYwBIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-08T23:52:04.38Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClaseGrid.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseGrid.cs",
+              "RelativeDocumentMoniker": "TRON\\ClaseGrid.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\ClaseGrid.cs",
+              "RelativeToolTip": "TRON\\ClaseGrid.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFYAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-07T21:24:11.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form1.cs [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.cs",
+              "RelativeDocumentMoniker": "TRON\\Form1.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.cs [Dise\u00F1o]",
+              "RelativeToolTip": "TRON\\Form1.cs [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-08T22:23:18.227Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.cs",
+              "RelativeDocumentMoniker": "TRON\\Form1.cs",
+              "ToolTip": "C:\\Users\\ACER\\OneDrive\\Documentos\\GitHub\\TRON\\Program\\TRON\\TRON\\Form1.cs",
+              "RelativeToolTip": "TRON\\Form1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-04T19:15:10.501Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
