@@ -45,20 +45,42 @@ namespace TRON
         // Método para mover el bot
         public void MoverBot(Grid grid, List<Moto> otrasMotos)
         {
-            // Escoge una dirección aleatoria, evitando que sea la opuesta a la última dirección
-            Direccion nuevaDireccion = ElegirDireccionAleatoria();
+            // Escoge una dirección segura evitando colisiones con su propia estela
+            Direccion nuevaDireccion = ElegirDireccionSegura(grid);
 
-            // Mueve el bot en la nueva dirección
-            Mover(nuevaDireccion, grid, otrasMotos);
+            // Calcular la nueva posición a la que intentará moverse
+            EstelaNodo nuevaPosicion = CalcularNuevaPosicion(nuevaDireccion, grid);
 
-            // Actualiza la última dirección
-            ultimaDireccion = nuevaDireccion;
+            // Verificar si la nueva posición está ocupada por otra moto o estela
+            bool colision = false;
+            foreach (var otraMoto in otrasMotos)
+            {
+                if (otraMoto.Estela.First.Value.X == nuevaPosicion.X && otraMoto.Estela.First.Value.Y == nuevaPosicion.Y)
+                {
+                    colision = true;  // Se detecta una colisión
+                    break;
+                }
+            }
+
+            if (!colision)
+            {
+                // Si no hay colisión, mover el bot a la nueva posición
+                Mover(nuevaDireccion, grid, otrasMotos);
+                ultimaDireccion = nuevaDireccion;  // Actualiza la última dirección solo si se mueve
+            }
+            else
+            {
+                // Manejar la colisión entre bots o con estelas
+                // Podrías decidir qué hacer aquí (destruir el bot, elegir una nueva dirección, etc.)
+            }
         }
 
-        // Escoger una dirección aleatoria evitando la dirección opuesta
-        private Direccion ElegirDireccionAleatoria()
+
+        // Escoger una dirección segura evitando la estela propia y la dirección opuesta
+        private Direccion ElegirDireccionSegura(Grid grid)
         {
             Direccion nuevaDireccion;
+            int intentos = 0;
             do
             {
                 int direccion = random.Next(4);  // 0 a 3 para las 4 direcciones posibles
@@ -70,11 +92,57 @@ namespace TRON
                     3 => Direccion.Derecha,
                     _ => Direccion.Derecha,  // Por defecto, derecha
                 };
+
+                // Verificar si la nueva dirección no lleva a una colisión con la estela propia
+                EstelaNodo proximaPosicion = CalcularNuevaPosicion(nuevaDireccion, grid);
+
+                // Verifica si el bot no chocará con su propia estela
+                if (!grid.GridNodes[proximaPosicion.X, proximaPosicion.Y].TieneEstela ||
+    (proximaPosicion.X == Estela.Last.Value.X && proximaPosicion.Y == Estela.Last.Value.Y))
+                {
+                    // Si la celda no tiene estela o es la última parte de su estela, es una dirección segura
+                    break;
+                }
+               
+
+                intentos++;
             }
-            // Repite si la nueva dirección es la opuesta a la última dirección
-            while (EsDireccionOpuesta(nuevaDireccion));
+            // Repite si la nueva dirección es la opuesta a la última dirección o lleva a una colisión
+            while (EsDireccionOpuesta(nuevaDireccion) || intentos < 10);  // Limitar intentos a 10 para evitar loops infinitos
 
             return nuevaDireccion;
+        }
+
+        // Método para calcular la nueva posición basada en la dirección
+        private EstelaNodo CalcularNuevaPosicion(Direccion direccion, Grid grid)
+        {
+            // Obtiene la posición actual de la cabeza del bot
+            EstelaNodo cabeza = Estela.First.Value;
+            int nuevaX = cabeza.X;
+            int nuevaY = cabeza.Y;
+
+            // Calcula la nueva posición basada en la dirección
+            switch (direccion)
+            {
+                case Direccion.Arriba:
+                    nuevaX -= 1;
+                    if (nuevaX < 0) nuevaX = grid.Filas - 1;  // Teletransportar de arriba a abajo
+                    break;
+                case Direccion.Abajo:
+                    nuevaX += 1;
+                    if (nuevaX >= grid.Filas) nuevaX = 0;  // Teletransportar de abajo a arriba
+                    break;
+                case Direccion.Izquierda:
+                    nuevaY -= 1;
+                    if (nuevaY < 0) nuevaY = grid.Columnas - 1;  // Teletransportar de izquierda a derecha
+                    break;
+                case Direccion.Derecha:
+                    nuevaY += 1;
+                    if (nuevaY >= grid.Columnas) nuevaY = 0;  // Teletransportar de derecha a izquierda
+                    break;
+            }
+
+            return new EstelaNodo(nuevaX, nuevaY);
         }
 
         // Verifica si la nueva dirección es la opuesta a la última

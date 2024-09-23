@@ -21,6 +21,7 @@ namespace TRON
         private Label labelGas;  // Etiqueta para el combustible
         private Panel panelMe;  // Panel para mostrar el color del jugador
         private Label labelMe;  // Etiqueta "Me" sobre el panel del jugador
+        private Label labelControl;  // Etiqueta controles
 
         public Menu()
         {
@@ -67,17 +68,25 @@ namespace TRON
             panelMe.Location = new Point(75, 70);  // Posición en el formulario
             this.Controls.Add(panelMe);  // Añadir el panel al formulario
 
-            // Crear la etiqueta "Me" dentro del panel
-            Label labelMe = new Label();
+            // Usar el campo de clase 'labelMe' en lugar de crear uno local
+            labelMe = new Label();
             labelMe.Text = "Me ->";  // Texto con la flecha
             labelMe.ForeColor = Color.White;  // Texto blanco
             labelMe.BackColor = Color.Transparent;  // Fondo transparente
             labelMe.Font = new Font("Eurostile", 12, FontStyle.Bold);  // Fuente personalizada si tienes
             labelMe.Location = new Point(panelMe.Left - 65, 80);  // Posición a la derecha del panel
-            labelMe.AutoSize = true;  // Ajusta automáticamente el tamaño del textol
+            labelMe.AutoSize = true;  // Ajusta automáticamente el tamaño del texto
+            this.Controls.Add(labelMe);  // Añadir el label al formulario
 
-            // Añadir el label al formulario
-            this.Controls.Add(labelMe);
+            // Usar el campo de clase 'labelControl' en lugar de crear uno local
+            labelControl = new Label();
+            labelControl.Text = "Control with arrows";  // Texto con la flecha
+            labelControl.ForeColor = Color.White;  // Texto blanco
+            labelControl.BackColor = Color.Transparent;  // Fondo transparente
+            labelControl.Font = new Font("Eurostile", 12, FontStyle.Bold);  // Fuente personalizada
+            labelControl.Location = new Point(65, 100);  // Posición en el formulario
+            labelControl.AutoSize = true;  // Ajusta automáticamente el tamaño del texto
+            this.Controls.Add(labelControl);  // Añadir el label al formulario
 
             this.DoubleBuffered = true;  // Activa el doble búfer para reducir el parpadeo al dibujar
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);  // Asegura el manejador de eventos para KeyDown
@@ -108,7 +117,7 @@ namespace TRON
             // Mover bots
             foreach (var bot in bots)
             {
-                bot.MoverBot(miGrid, bots.Cast<Moto>().ToList());  // Línea 76
+                bot.MoverBot(miGrid, bots.Cast<Moto>().ToList());
             }
 
             // Actualizar la barra de progreso del combustible
@@ -134,7 +143,7 @@ namespace TRON
                 {
                     // Determinar color de la celda
                     Color colorCelda = miGrid.GridNodes[i, j].TieneEstela ? Color.Red : Color.FromArgb(50, 50, 50);  // Celdas vacías de color oscuro
-                    Color colorBorde = Color.Cyan;  // Borde en color cian para estilo "neón"
+                    Color colorBorde = Color.LightSkyBlue;  // Borde en color cian para estilo "neón"
 
                     // Dibujar la celda con offset
                     g.FillRectangle(new SolidBrush(colorCelda), offsetX + j * tamañoCelda, offsetY + i * tamañoCelda, tamañoCelda, tamañoCelda);
@@ -155,7 +164,7 @@ namespace TRON
         // Método auxiliar para dibujar una moto (jugador o bot)
         private void DibujarMoto(Graphics g, Moto moto)
         {
-            // Usar el mismo color para toda la moto, incluyendo la cabeza
+            // Usar el mismo color para toda la moto
             Brush brushMoto = new SolidBrush(moto.ColorMoto);  // Usa el color asignado a la moto
 
             foreach (EstelaNodo nodo in moto.Estela)

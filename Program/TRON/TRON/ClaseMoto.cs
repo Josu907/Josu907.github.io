@@ -52,6 +52,9 @@ namespace TRON
             // Calcular la nueva posición de la moto
             EstelaNodo nuevaPosicion = CalcularNuevaPosicion(direccion, grid);
 
+            // Verificar si la nueva posición tiene combustible o poder
+            RecogerCombustibleYPoder(nuevaPosicion, grid);
+
             // Verificar si la nueva posición choca con una estela (propia o de otro bot)
             if (grid.GridNodes[nuevaPosicion.X, nuevaPosicion.Y].TieneEstela)
             {
@@ -94,6 +97,28 @@ namespace TRON
             Combustible -= Velocidad / 5;
         }
 
+        // Método para recoger combustible y poderes
+        private void RecogerCombustibleYPoder(EstelaNodo nuevaPosicion, Grid grid)
+        {
+            var nodoActual = grid.GridNodes[nuevaPosicion.X, nuevaPosicion.Y];
+
+            // Recoger combustible si hay en la celda
+            if (nodoActual.TieneItem)
+            {
+                Combustible = Math.Min(100, Combustible + nodoActual.Combustible);  // Limitar a 100
+                nodoActual.TieneItem = false;  // Eliminar el combustible de la celda
+                nodoActual.Combustible = 0;  // Restablecer el valor de combustible
+            }
+
+            // Recoger poder si hay en la celda
+            if (nodoActual.TienePoder)
+            {
+                Poderes.Push(nodoActual.Poder);  // Añadir el poder a la pila
+                nodoActual.TienePoder = false;  // Eliminar el poder de la celda
+                nodoActual.Poder = null;  // Restablecer el poder
+            }
+        }
+
         // Método para calcular la nueva posición de la moto
         private EstelaNodo CalcularNuevaPosicion(Direccion direccion, Grid grid)
         {
@@ -132,13 +157,13 @@ namespace TRON
             if (!EstaDestruida)
             {
                 EstaDestruida = true;
+
                 // Limpiar la estela del grid
                 foreach (var nodo in Estela)
                 {
                     grid.RestaurarColorCelda(nodo.X, nodo.Y);  // Restaurar el color de las celdas ocupadas por la estela
                 }
                 Estela.Clear();  // Limpiar la estela de la moto
-                // Aquí podrías agregar lógica adicional, como liberar ítems y poderes en el mapa.
             }
         }
     }
@@ -165,7 +190,6 @@ namespace TRON
         Derecha
     }
 
-    // Clases Item y Poder (simplificadas para el ejemplo)
+    // Clase Item (simplificada para el ejemplo)
     public class Item { }
-    public class Poder { }
 }
