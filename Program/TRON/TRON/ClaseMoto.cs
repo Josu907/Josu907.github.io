@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;  // Para manejar colores
 
 namespace TRON
 {
@@ -15,14 +16,18 @@ namespace TRON
 
         public bool EstaDestruida { get; private set; } = false;  // Estado de la moto (si está destruida)
 
+        // Nuevo atributo para el color de la moto/estela
+        public Color ColorMoto { get; private set; }
+
         // Constructor de la moto
-        public Moto()
+        public Moto(Color color)
         {
             Velocidad = new Random().Next(1, 11);  // Velocidad aleatoria entre 1 y 10
             Combustible = 100;  // Combustible inicial al máximo
             Items = new Queue<Item>();  // Inicializa la cola de ítems
             Poderes = new Stack<Poder>();  // Inicializa la pila de poderes
             Estela = new LinkedList<EstelaNodo>();  // Inicializa la lista enlazada de estela
+            ColorMoto = color;  // Asigna el color proporcionado
 
             // Inicializa la estela con 3 posiciones (tamaño inicial de la estela)
             for (int i = 0; i < 3; i++)
@@ -76,9 +81,9 @@ namespace TRON
                 grid.RestaurarColorCelda(ultimaPosicion.X, ultimaPosicion.Y);
             }
 
-            // Añadir la nueva posición a la estela
+            // Añadir la nueva posición a la estela y aplicar el color de la moto
             Estela.AddFirst(nuevaPosicion);
-            grid.ColocarEstela(nuevaPosicion.X, nuevaPosicion.Y);
+            grid.ColocarEstela(nuevaPosicion.X, nuevaPosicion.Y, ColorMoto);  // Aplica el color de la moto a la estela
 
             // Limitar el tamaño de la estela
             if (Estela.Count > MaxEstela)

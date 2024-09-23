@@ -9,7 +9,7 @@ namespace TRON
     {
         private Moto miMoto;  // Instancia de la moto del jugador
         private Grid miGrid;  // Instancia del grid
-        private const int tamañoCelda = 15;  // Tamaño de cada celda en píxeles
+        private const int tamañoCelda = 13;  // Tamaño de cada celda en píxeles
         private const int offsetX = 235;  // Desplazamiento en X para el dibujo del grid
         private const int offsetY = 0;  // Desplazamiento en Y para el dibujo del grid
         private System.Windows.Forms.Timer gameTimer;  // Timer para el movimiento continuo
@@ -18,14 +18,20 @@ namespace TRON
         private List<Moto> otrasMotos;  // Lista de otras motos (bots)
         private List<Bot> bots;  // Lista de bots
         private ProgressBar progressBarCombustible;  // Barra de progreso para el combustible
+        private Label labelGas;  // Etiqueta para el combustible
+        private Panel panelMe;  // Panel para mostrar el color del jugador
+        private Label labelMe;  // Etiqueta "Me" sobre el panel del jugador
 
         public Menu()
         {
             InitializeComponent();
-            miGrid = new Grid(40, 40);  // Crear un grid de 40x40
-            miMoto = new Moto();  // Crear una moto
+            miGrid = new Grid(45, 50);  // Crear un grid de 45x50
+            miMoto = new Moto(Color.Blue);  // Crear una moto
             otrasMotos = new List<Moto>();  // Inicializa la lista de otras motos (bots)
             bots = new List<Bot>();  // Inicializa la lista de bots
+
+            // Cambiar el color de fondo del formulario a negro
+            this.BackColor = Color.Black;
 
             // Inicializa la barra de progreso del combustible
             progressBarCombustible = new ProgressBar();
@@ -35,6 +41,16 @@ namespace TRON
             progressBarCombustible.Value = miMoto.Combustible;  // Valor inicial del combustible
             this.Controls.Add(progressBarCombustible);  // Agregar la barra al formulario
 
+            // Agregar la etiqueta "Gas" encima de la barra de combustible
+            labelGas = new Label();
+            labelGas.Text = "Gas";  // Texto a mostrar
+            labelGas.ForeColor = Color.White;  // Color del texto
+            labelGas.BackColor = Color.Transparent;  // Fondo transparente
+            labelGas.Font = new Font("Eurostile", 12, FontStyle.Bold);  // Puedes cambiar la fuente por una futurista si la tienes
+            labelGas.Location = new Point(10, 35);  // Posición sobre la barra de combustible
+            labelGas.AutoSize = true;  // Tamaño automático
+            this.Controls.Add(labelGas);  // Añadir la etiqueta al formulario
+
             // Establecer el tamaño inicial de la estela en 3 nodos
             miMoto.Estela.Clear();  // Limpiar cualquier nodo existente
             miMoto.Estela.AddFirst(new EstelaNodo(10, 10));  // Posición inicial
@@ -43,6 +59,25 @@ namespace TRON
 
             // Crear y agregar bots
             CrearBots();
+
+            // Agregar el panel con el color del jugador
+            panelMe = new Panel();
+            panelMe.BackColor = miMoto.ColorMoto;  // Color de la moto del jugador
+            panelMe.Size = new Size(40, 40);  // Tamaño del recuadro
+            panelMe.Location = new Point(75, 70);  // Posición en el formulario
+            this.Controls.Add(panelMe);  // Añadir el panel al formulario
+
+            // Crear la etiqueta "Me" dentro del panel
+            Label labelMe = new Label();
+            labelMe.Text = "Me ->";  // Texto con la flecha
+            labelMe.ForeColor = Color.White;  // Texto blanco
+            labelMe.BackColor = Color.Transparent;  // Fondo transparente
+            labelMe.Font = new Font("Eurostile", 12, FontStyle.Bold);  // Fuente personalizada si tienes
+            labelMe.Location = new Point(panelMe.Left - 65, 80);  // Posición a la derecha del panel
+            labelMe.AutoSize = true;  // Ajusta automáticamente el tamaño del textol
+
+            // Añadir el label al formulario
+            this.Controls.Add(labelMe);
 
             this.DoubleBuffered = true;  // Activa el doble búfer para reducir el parpadeo al dibujar
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);  // Asegura el manejador de eventos para KeyDown
@@ -59,7 +94,7 @@ namespace TRON
         {
             for (int i = 0; i < 4; i++)  // Crear 4 bots
             {
-                Bot nuevoBot = new Bot();
+                Bot nuevoBot = new Bot(miGrid);
                 nuevoBot.Estela.AddFirst(new EstelaNodo(5 + i, 5 + i));  // Colocar los bots en diferentes posiciones
                 bots.Add(nuevoBot);
             }
@@ -81,10 +116,12 @@ namespace TRON
 
             Invalidate();  // Redibujar la pantalla
         }
+
         private void Form1_Load(object? sender, EventArgs e)
         {
             // Código adicional si es necesario
         }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -96,11 +133,12 @@ namespace TRON
                 for (int j = 0; j < miGrid.Columnas; j++)
                 {
                     // Determinar color de la celda
-                    Color colorCelda = miGrid.GridNodes[i, j].TieneEstela ? Color.Red : Color.LightGray;
+                    Color colorCelda = miGrid.GridNodes[i, j].TieneEstela ? Color.Red : Color.FromArgb(50, 50, 50);  // Celdas vacías de color oscuro
+                    Color colorBorde = Color.Cyan;  // Borde en color cian para estilo "neón"
 
                     // Dibujar la celda con offset
                     g.FillRectangle(new SolidBrush(colorCelda), offsetX + j * tamañoCelda, offsetY + i * tamañoCelda, tamañoCelda, tamañoCelda);
-                    g.DrawRectangle(Pens.Black, offsetX + j * tamañoCelda, offsetY + i * tamañoCelda, tamañoCelda, tamañoCelda);  // Bordes de las celdas
+                    g.DrawRectangle(new Pen(colorBorde), offsetX + j * tamañoCelda, offsetY + i * tamañoCelda, tamañoCelda, tamañoCelda);  // Bordes cian
                 }
             }
 
@@ -117,13 +155,11 @@ namespace TRON
         // Método auxiliar para dibujar una moto (jugador o bot)
         private void DibujarMoto(Graphics g, Moto moto)
         {
-            bool esCabeza = true;
+            // Usar el mismo color para toda la moto, incluyendo la cabeza
+            Brush brushMoto = new SolidBrush(moto.ColorMoto);  // Usa el color asignado a la moto
+
             foreach (EstelaNodo nodo in moto.Estela)
             {
-                // Determinar el color para la cabeza de la moto
-                Brush brushMoto = esCabeza ? Brushes.Green : Brushes.Blue;  // Verde para la cabeza, azul para el resto de la estela
-                esCabeza = false;
-
                 // Dibujar cada parte de la estela de la moto con offset
                 g.FillRectangle(brushMoto, offsetX + nodo.Y * tamañoCelda, offsetY + nodo.X * tamañoCelda, tamañoCelda, tamañoCelda);
                 g.DrawRectangle(Pens.Black, offsetX + nodo.Y * tamañoCelda, offsetY + nodo.X * tamañoCelda, tamañoCelda, tamañoCelda);
@@ -155,9 +191,6 @@ namespace TRON
 
             // Guardar la dirección actual para la próxima validación
             direccionAnterior = direccionActual;
-
-
         }
-
     }
 }

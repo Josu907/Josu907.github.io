@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;  // Para manejar los colores
 
 namespace TRON
 {
@@ -20,6 +21,9 @@ namespace TRON
         public bool TieneItem { get; set; }    // Indica si hay un ítem en la celda
         public bool TienePoder { get; set; }   // Indica si hay un poder en la celda
 
+        // Nuevo atributo para el color de la estela/moto en la celda
+        public Color Color { get; set; }        // Color de la estela/moto
+
         public GridNode(int x, int y)
         {
             X = x;
@@ -27,6 +31,7 @@ namespace TRON
             TieneEstela = false;
             TieneItem = false;
             TienePoder = false;
+            Color = Color.Black;  // Color predeterminado (negro para celdas vacías)
         }
     }
 
@@ -74,22 +79,44 @@ namespace TRON
             }
         }
 
-        // Método para colocar una estela
-        public void ColocarEstela(int x, int y)
+        // Método para colocar una estela con color brillante de "neón"
+        public void ColocarEstela(int x, int y, Color color)
         {
             if (x >= 0 && x < Filas && y >= 0 && y < Columnas)
             {
                 GridNodes[x, y].TieneEstela = true;
+                GridNodes[x, y].Color = color;  // Asignar color de la estela/moto
             }
         }
 
-        // Método para restaurar el color original de una celda
+        // Método para restaurar el color original de una celda a un color oscuro
         public void RestaurarColorCelda(int x, int y)
         {
             if (x >= 0 && x < Filas && y >= 0 && y < Columnas)
             {
-                GridNodes[x, y].TieneEstela = false;  // Restablecer la celda sin estela
+                GridNodes[x, y].TieneEstela = false;
+                GridNodes[x, y].Color = Color.Black;  // Restaurar a un color oscuro
             }
+        }
+
+        // Método para generar una posición aleatoria libre (sin estela, ítem o poder)
+        public GridNode GenerarPosicionAleatoriaLibre()
+        {
+            Random random = new Random();
+            GridNode nodoAleatorio;
+
+            do
+            {
+                // Genera coordenadas X e Y aleatorias dentro de los límites de la malla
+                int x = random.Next(Filas);  // Entre 0 y el número de filas
+                int y = random.Next(Columnas);  // Entre 0 y el número de columnas
+
+                nodoAleatorio = GridNodes[x, y];
+
+                // Verifica que la celda no tenga estela, ítems ni poderes
+            } while (nodoAleatorio.TieneEstela || nodoAleatorio.TieneItem || nodoAleatorio.TienePoder);
+
+            return nodoAleatorio;
         }
     }
 }
