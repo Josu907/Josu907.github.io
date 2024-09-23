@@ -12,12 +12,10 @@ namespace TRON
         public Queue<Item> Items { get; private set; }  // Cola de ítems
         public Stack<Poder> Poderes { get; private set; }  // Pila de poderes
         public LinkedList<EstelaNodo> Estela { get; private set; }  // Lista enlazada simple que representa la estela
-        public int MaxEstela { get; set; } = 4;  // Tamaño máximo de la estela
+        public int MaxEstela { get; set; } = 6;  // Tamaño máximo de la estela
 
         public bool EstaDestruida { get; private set; } = false;  // Estado de la moto (si está destruida)
-
-        // Nuevo atributo para el color de la moto/estela
-        public Color ColorMoto { get; private set; }
+        public Color ColorMoto { get; private set; } //Color de la moto/estela
 
         // Constructor de la moto
         public Moto(Color color)

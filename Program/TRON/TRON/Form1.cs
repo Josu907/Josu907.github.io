@@ -9,7 +9,7 @@ namespace TRON
     {
         private Moto miMoto;  // Instancia de la moto del jugador
         private Grid miGrid;  // Instancia del grid
-        private const int tamañoCelda = 13;  // Tamaño de cada celda en píxeles
+        private const int tamañoCelda = 20;  // Tamaño de cada celda en píxeles
         private const int offsetX = 235;  // Desplazamiento en X para el dibujo del grid
         private const int offsetY = 0;  // Desplazamiento en Y para el dibujo del grid
         private System.Windows.Forms.Timer gameTimer;  // Timer para el movimiento continuo
@@ -26,7 +26,7 @@ namespace TRON
         public Menu()
         {
             InitializeComponent();
-            miGrid = new Grid(45, 50);  // Crear un grid de 45x50
+            miGrid = new Grid(40, 50);  // Crear un grid de 45x50
             miMoto = new Moto(Color.Blue);  // Crear una moto
             otrasMotos = new List<Moto>();  // Inicializa la lista de otras motos (bots)
             bots = new List<Bot>();  // Inicializa la lista de bots

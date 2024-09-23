@@ -57,6 +57,7 @@ namespace TRON
             {
                 if (otraMoto.Estela.First.Value.X == nuevaPosicion.X && otraMoto.Estela.First.Value.Y == nuevaPosicion.Y)
                 {
+                    DestruirMoto(Grid grid);
                     colision = true;  // Se detecta una colisión
                     break;
                 }
@@ -70,8 +71,7 @@ namespace TRON
             }
             else
             {
-                // Manejar la colisión entre bots o con estelas
-                // Podrías decidir qué hacer aquí (destruir el bot, elegir una nueva dirección, etc.)
+                DestruirMoto(Grid grid);
             }
         }
 
